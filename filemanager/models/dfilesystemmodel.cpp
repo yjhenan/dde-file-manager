@@ -63,18 +63,12 @@ DFileSystemModel::DFileSystemModel(DFileView *parent)
 
 DFileSystemModel::~DFileSystemModel()
 {
-//    for(const FileSystemNodePointer &node : m_urlToNode) {
-//        if(node->fileInfo->isDir())
-//            fileService->removeUrlMonitor(node->fileInfo->fileUrl());
-//    }
-
-//    setRootUrl(DUrl());
     addChildrenSemaphore.acquire();
 
     if (jobController) {
         jobController->stopAndDeleteLater();
     }
-
+    QDir::setCurrent(QDir::homePath());
     clear();
 }
 

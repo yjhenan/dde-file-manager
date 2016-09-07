@@ -69,7 +69,6 @@ void DBookmarkMountedIndicatorItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *
         fmEvent = DUrl::fromLocalFile(QDir::homePath());
         fileSignalManager->requestChangeCurrentUrl(fmEvent);
     }
-
     deviceListener->unmount(m_parentItem->getSysPath());
     update();
 }
