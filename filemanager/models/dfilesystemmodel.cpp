@@ -908,8 +908,10 @@ const FileSystemNodePointer DFileSystemModel::getNodeByIndex(const QModelIndex &
 
     FileSystemNode *indexNode = static_cast<FileSystemNode*>(index.internalPointer());
 
-    if (m_rootNode->children.key(FileSystemNodePointer(indexNode)).isEmpty())
+    if (indexNode == m_rootNode.constData()
+            || m_rootNode->children.value(m_rootNode->visibleChildren.value(index.row())).constData() != indexNode) {
         return m_rootNode;
+    }
 
     return FileSystemNodePointer(indexNode);
 }
