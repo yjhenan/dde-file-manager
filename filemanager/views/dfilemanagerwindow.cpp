@@ -395,12 +395,23 @@ void DMainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     if (this->isActiveWindow()){
         if (event->y() <= m_fileManagerWindow->getTitleBar()->height() + layoutMargin + 2) {
+#ifdef ARCH_MIPSEL
+            if (event->buttons()) {
+                Qt::MouseButton button = event->buttons() & Qt::LeftButton ? Qt::LeftButton :
+                    event->buttons() & Qt::RightButton ? Qt::RightButton :
+                    Qt::NoButton;
+                if (button != Qt::RightButton){
+                    startMoving(button);
+                }
+            }
+#else
             if (event->buttons()) {
                 Qt::MouseButton button = event->buttons() & Qt::LeftButton ? Qt::LeftButton :
                     event->buttons() & Qt::RightButton ? Qt::RightButton :
                     Qt::NoButton;
                 startMoving(button);
             }
+#endif
         }
     }
     DWindowFrame::mouseMoveEvent(event);
