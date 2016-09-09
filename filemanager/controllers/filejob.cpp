@@ -461,8 +461,14 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
                 if(!to.open(QIODevice::WriteOnly))
                 {
                     //Operation failed
-                    qDebug() << tarDir << "isn't write only";
-                    return false;
+                    qDebug() << to.fileName() << to.error() << to.errorString() << "isn't write only";
+                    QString toFileName =  tarDir + "/" + DUrl::toPercentEncoding(m_srcFileName);
+                    qDebug() << "toPercentEncoding" <<  toFileName;
+                    to.setFileName(toFileName);
+                    if (!to.open(QIODevice::WriteOnly)){
+                        qDebug() << to.fileName() << to.error() <<to.errorString() << "isn't write only";
+                        return false;
+                    }
                 }
                 m_status = Run;
                 break;
@@ -629,14 +635,15 @@ bool FileJob::copyDir(const QString &srcPath, const QString &tarPath, bool isMov
 
                 if(fileInfo.isDir())
                 {
-                    if(!copyDir(fileInfo.filePath(), targetDir.absolutePath()))
-                        return false;
+                    if(!copyDir(fileInfo.filePath(), targetDir.absolutePath())){
+                        qDebug() << "coye dir" << fileInfo.filePath() << "failed";
+                    }
                 }
                 else
                 {
                     if(!copyFile(fileInfo.filePath(), targetDir.absolutePath()))
                     {
-                        return false;
+                        qDebug() << "coye file" << fileInfo.filePath() << "failed";
                     }
                 }
             }
