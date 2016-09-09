@@ -65,6 +65,12 @@ DFileSystemModel::~DFileSystemModel()
     if (jobController) {
         jobController->stopAndDeleteLater();
     }
+
+    if (updateChildrenFuture.isRunning()) {
+        updateChildrenFuture.cancel();
+        updateChildrenFuture.waitForFinished();
+    }
+
     QDir::setCurrent(QDir::homePath());
     clear();
 }
@@ -363,8 +369,8 @@ void DFileSystemModel::fetchMore(const QModelIndex &parent)
         if (jobController->isFinished()) {
             jobController->deleteLater();
         } else {
-            QEventLoop eventLoop(this);
-
+            QEventLoop eventLoop;
+            QPointer<DFileSystemModel> me = this;
             this->eventLoop = &eventLoop;
 
             connect(jobController, &JobController::destroyed, &eventLoop, &QEventLoop::quit);
@@ -375,7 +381,16 @@ void DFileSystemModel::fetchMore(const QModelIndex &parent)
 
             this->eventLoop = Q_NULLPTR;
 
-            if (code != 0)
+            if (code != 0) {
+                jobController->terminate();
+                jobController->quit();
+                jobController->wait();
+                jobController->deleteLater();
+
+                return;
+            }
+
+            if (!me)
                 return;
         }
     }
@@ -517,6 +532,11 @@ QModelIndex DFileSystemModel::setRootUrl(const DUrl &fileUrl)
 {
     if (eventLoop)
         eventLoop->exit(1);
+
+    if (updateChildrenFuture.isRunning()) {
+        updateChildrenFuture.cancel();
+        updateChildrenFuture.waitForFinished();
+    }
 
     if (m_rootNode) {
         const DUrl m_rootFileUrl = m_rootNode->fileInfo->fileUrl();
@@ -725,7 +745,7 @@ void DFileSystemModel::updateChildren(QList<AbstractFileInfoPointer> list)
         if (QThreadPool::globalInstance()->activeThreadCount() >= QThreadPool::globalInstance()->maxThreadCount())
             QThreadPool::globalInstance()->setMaxThreadCount(QThreadPool::globalInstance()->maxThreadCount() + 10);
 
-        QtConcurrent::run(QThreadPool::globalInstance(), this, &DFileSystemModel::updateChildren, list);
+        updateChildrenFuture = QtConcurrent::run(QThreadPool::globalInstance(), this, &DFileSystemModel::updateChildren, list);
 
         return;
     };
