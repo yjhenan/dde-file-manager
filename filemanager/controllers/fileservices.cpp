@@ -603,10 +603,10 @@ QString FileServices::getSymlinkFileName(const DUrl &fileUrl)
 void FileServices::openUrl(const FMEvent &event) const
 {
     const AbstractFileInfoPointer &fileInfo = createFileInfo(event.fileUrl());
-
+    qDebug() << event << event.fileUrl().isSearchFile();
     if (fileInfo && fileInfo->isDir()) {
         fileSignalManager->requestChangeCurrentUrl(event);
-    } else if (deviceListener->isDeviceFolder(event.fileUrl().path())) {
+    } else if (deviceListener->isDeviceFolder(event.fileUrl().path()) && fileInfo->isDir()) {
         fileSignalManager->requestChangeCurrentUrl(event);
     } else {
         openFile(event.fileUrl());
