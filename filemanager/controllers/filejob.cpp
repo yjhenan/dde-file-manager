@@ -908,7 +908,7 @@ bool FileJob::moveDir(const QString &srcFile, const QString &tarDir, QString *ta
 bool FileJob::deleteFile(const QString &file)
 {
     if(QFile::remove(file)){
-        qDebug() << " delete file:" << file << "successfully";
+//        qDebug() << " delete file:" << file << "successfully";
         return true;
     }
     else
@@ -937,11 +937,12 @@ bool FileJob::deleteDir(const QString &dir)
         if (fileInfo.isFile() || fileInfo.isSymLink()) {
             if (!deleteFile(fileInfo.filePath())) {
                 emit error("Unable to remove file");
-                return false;
+                qDebug() << "Unable to remove file" << fileInfo.filePath();
             }
         } else {
-            if (!deleteDir(fileInfo.filePath()))
-                return false;
+            if (!deleteDir(fileInfo.filePath())){
+                qDebug() << "Unable to remove dir" << fileInfo.filePath();
+            }
         }
     }
 

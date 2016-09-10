@@ -1881,7 +1881,7 @@ void DFileView::showEmptyAreaMenu()
 {
     const QModelIndex &index = rootIndex();
     const AbstractFileInfoPointer &info = model()->fileInfo(index);
-    info->updateFileInfo();
+
     const QVector<MenuAction> &actions = info->menuActionList(AbstractFileInfo::SpaceArea);
 
     if (actions.isEmpty())
