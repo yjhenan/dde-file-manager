@@ -177,6 +177,11 @@ DSearchBar *DToolBar::getSearchBar()
     return m_searchBar;
 }
 
+void DToolBar::setCrumb(const DUrl &url)
+{
+    m_crumbWidget->setCrumb(url);
+}
+
 void DToolBar::searchBarClicked()
 {
     searchBarActivated();

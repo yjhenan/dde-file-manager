@@ -321,6 +321,9 @@ void DFileManagerWindow::createNewView(const FMEvent &event)
 
     m_tabBar->addTab(event.fileUrl().toString());
     connect(view, &DFileView::viewModeChanged, m_toolbar, &DToolBar::checkViewModeButton);
+
+    m_leftSideBar->setFileView(m_fileView);
+    m_leftSideBar->setToolbar(m_toolbar);
 }
 
 

@@ -31,6 +31,7 @@ public:
     void initContollerToolBar();
     void initConnect();
     DSearchBar * getSearchBar();
+    void setCrumb(const DUrl& url);
 
 signals:
     void requestIconView();

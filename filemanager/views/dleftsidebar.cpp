@@ -20,6 +20,8 @@
 #include "dbookmarkscene.h"
 #include "dbookmarkitemgroup.h"
 #include "dbookmarkrootitem.h"
+#include "dfileview.h"
+#include "dtoolbar.h"
 
 #include <dscrollbar.h>
 
@@ -85,6 +87,7 @@ void DLeftSideBar::initConnect()
     connect(m_scene, &DBookmarkScene::dragEntered, this, &DLeftSideBar::doDragEnter);
     connect(m_scene, &DBookmarkScene::dragLeft, this, &DLeftSideBar::doDragLeave);
     connect(m_scene, &DBookmarkScene::dropped, this, &DLeftSideBar::doDragLeave);
+    connect(deviceListener, &UDiskListener::requestDiskInfosFinihsed, this, &DLeftSideBar::handdleRequestDiskInfosFinihsed);
 }
 
 void DLeftSideBar::initNav()
@@ -240,6 +243,22 @@ void DLeftSideBar::doDragLeave()
     update();
 }
 
+void DLeftSideBar::handdleRequestDiskInfosFinihsed()
+{
+    if (m_fileView){
+        qDebug() << "current url:" << m_fileView->currentUrl();
+        if (deviceListener->getDeviceMediaType(m_fileView->currentUrl().path()) == UDiskDeviceInfo::removable){
+            if (m_toolbar){
+                m_toolbar->setCrumb(m_fileView->currentUrl());
+                DBookmarkItem* item =  m_scene->hasBookmarkItem(m_fileView->currentUrl());
+                if (item){
+                    item->setChecked(true);
+                }
+            }
+        }
+    }
+}
+
 void DLeftSideBar::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
@@ -285,17 +304,35 @@ void DLeftSideBar::loadDevices()
 {
     if (deviceListener->getAllDeviceInfos().count() == 0){
         deviceListener->update();
+
     }else{
         foreach (UDiskDeviceInfo* device, deviceListener->getDeviceList()) {
             m_scene->mountAdded(device);
         }
     }
 }
+DToolBar *DLeftSideBar::toolbar() const
+{
+    return m_toolbar;
+}
+
+void DLeftSideBar::setToolbar(DToolBar *toolbar)
+{
+    m_toolbar = toolbar;
+}
+
+
+DFileView *DLeftSideBar::fileView() const
+{
+    return m_fileView;
+}
+
+void DLeftSideBar::setFileView(DFileView *fileView)
+{
+    m_fileView = fileView;
+}
+
 QGraphicsView *DLeftSideBar::view() const
 {
     return m_view;
 }
-
-
-
-
