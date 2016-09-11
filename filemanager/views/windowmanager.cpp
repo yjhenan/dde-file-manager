@@ -94,13 +94,15 @@ void WindowManager::showNewWindow(const DUrl &url, bool isAlwaysOpen)
 
     QX11Info::setAppTime(QX11Info::appUserTime());
     DMainWindow *window = new DMainWindow();
+    loadWindowState(window);
+    window->show();
+    qDebug() << "new window" << window->winId() << url;
+
     connect(window, &DMainWindow::aboutToClose,
             this, &WindowManager::onWindowClosed);
 
-    qDebug() << "new window" << window->winId() << url;
     m_windows.insert(window, window->winId());
 
-    loadWindowState(window);
     if (m_windows.count() == 1){
         QPoint pos = QCursor::pos();
         QRect currentScreenGeometry;
@@ -118,7 +120,6 @@ void WindowManager::showNewWindow(const DUrl &url, bool isAlwaysOpen)
         window->moveCenter(currentScreenGeometry.center());
     }
     window->fileManagerWindow()->setFileViewMode(m_fmStateManager->fmState()->viewMode());
-    window->show();
 
     FMEvent event;
     if (!url.isEmpty()){

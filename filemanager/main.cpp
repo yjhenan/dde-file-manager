@@ -71,18 +71,19 @@ int main(int argc, char *argv[])
         if (translator.load(APPSHAREDIR"/translations/" + app.applicationName() +"_" + QLocale::system().name()))
             app.installTranslator(&translator);
 
-        QTranslator translator_qt;
+        DThemeManager::instance()->setTheme("light");
 
+        app.setApplicationDisplayName(QObject::tr("Deepin File Manager"));
+
+        fileManagerApp->show(commandlineUrl);
+
+        QTranslator translator_qt;
         if (translator_qt.load(QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qt_" + QLocale::system().name() + ".qm"))
             app.installTranslator(&translator_qt);
-
-        DThemeManager::instance()->setTheme("light");
 
         /// fix Qt drag drop to google chrome bug
         new XdndWorkaround();
 
-        app.setApplicationDisplayName(QObject::tr("Deepin File Manager"));
-        fileManagerApp->show(commandlineUrl);
         dialogManager;
         appController->createGVfSManager();
         QThreadPool::globalInstance()->setMaxThreadCount(MAX_THREAD_COUNT);
