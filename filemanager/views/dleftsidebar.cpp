@@ -249,7 +249,9 @@ void DLeftSideBar::handdleRequestDiskInfosFinihsed()
         qDebug() << "current url:" << m_fileView->currentUrl();
         if (deviceListener->getDeviceMediaType(m_fileView->currentUrl().path()) == UDiskDeviceInfo::removable){
             if (m_toolbar){
-                m_toolbar->setCrumb(m_fileView->currentUrl());
+                if (!m_fileView->currentUrl().path().isEmpty()){
+                    m_toolbar->setCrumb(m_fileView->currentUrl());
+                }
                 DBookmarkItem* item =  m_scene->hasBookmarkItem(m_fileView->currentUrl());
                 if (item){
                     item->setChecked(true);

@@ -1,3 +1,4 @@
+
 #include "logutil.h"
 #include "widgets/commandlinemanager.h"
 #include <DLog>

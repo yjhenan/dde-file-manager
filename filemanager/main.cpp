@@ -52,7 +52,6 @@ int main(int argc, char *argv[])
     CommandLineManager::instance()->process();
 
     DUrl commandlineUrl;
-
     if (CommandLineManager::instance()->positionalArguments().count() > 0){
         commandlineUrl = DUrl::fromUserInput(CommandLineManager::instance()->positionalArguments().at(0));
     } else {
@@ -62,6 +61,7 @@ int main(int argc, char *argv[])
     QString uniqueKey = app.applicationName();
 
     bool isSingleInstance  = app.setSingleInstance(uniqueKey);
+    bool isBackendRun = CommandLineManager::instance()->isSet("d");
 
     qDebug() << isSingleInstance << commandlineUrl;
 
@@ -75,7 +75,8 @@ int main(int argc, char *argv[])
 
         app.setApplicationDisplayName(QObject::tr("Deepin File Manager"));
 
-        fileManagerApp->show(commandlineUrl);
+        if (!isBackendRun)
+            fileManagerApp->show(commandlineUrl);
 
         QTranslator translator_qt;
         if (translator_qt.load(QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qt_" + QLocale::system().name() + ".qm"))
@@ -97,6 +98,9 @@ int main(int argc, char *argv[])
         quick_exit(app.exec());
 #endif
     }else{
+        bool isBackendRun = CommandLineManager::instance()->isSet("d");
+        if (isBackendRun)
+            return 0;
         SingleApplication::newClientProcess(uniqueKey);
         QWidget w;
         w.setWindowFlags(Qt::FramelessWindowHint);

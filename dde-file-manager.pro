@@ -274,7 +274,12 @@ DEFINES += APPSHAREDIR=\\\"$$APPSHAREDIR\\\"
 target.path = $$BINDIR
 
 desktop.path = $${PREFIX}/share/applications/
-desktop.files = $${TARGET}.desktop
+
+isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
+    desktop.files = $$PWD/mips/$${TARGET}.desktop
+}else{
+    desktop.files = $${TARGET}.desktop
+}
 
 templateFiles.path = $$APPSHAREDIR/templates
 templateFiles.files = skin/templates/newDoc.doc \
@@ -313,11 +318,19 @@ icon.files = skin/images/$${TARGET}.svg
 dde-xdg-user-dirs-update.path = $$BINDIR
 dde-xdg-user-dirs-update.files = $$PWD/dde-xdg-user-dirs-update.sh
 
-
 INSTALLS += target desktop templateFiles translations mimetypeFiles help icon dde-xdg-user-dirs-update
 
 isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
+    dde-mips-shs.path = $$BINDIR
+    dde-mips-shs.files = $$PWD/mips/dde-computer.sh \
+                         $$PWD/mips/dde-trash.sh \
+                         $$PWD/mips/file-manager-daemon.sh \
+                         $$PWD/mips/file-manager.sh
 
+    file_manager_daemon_autostart.path = /etc/xdg/autostart
+    file_manager_daemon_autostart.files = $$PWD/mips/file-manager-daemon-autostart.desktop
+
+    INSTALLS += dde-mips-shs file_manager_daemon_autostart
 }else{
     xdg_autostart.path = /etc/xdg/autostart
     xdg_autostart.files = dde-file-manager-xdg-autostart.desktop

@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=file-manager-daemon auto
+Exec=/usr/bin/file-manager-daemon.sh
+NoShowIn=GNOME;Unity;Deepin
