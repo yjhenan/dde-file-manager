@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Exec=/usr/bin/file-manager.sh
+Exec=/usr/bin/file-manager.sh %u
 Icon=dde-file-manager
 StartupNotify=true
 Terminal=false
