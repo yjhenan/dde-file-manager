@@ -24,6 +24,7 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QDir>
+#include <QProcess>
 
 #include "xdndworkaround.h"
 
@@ -95,7 +96,12 @@ int main(int argc, char *argv[])
         ProfilerStop();
         quick_exit(request);
 #else
-        quick_exit(app.exec());
+        int ret = app.exec();
+#ifdef AUTO_RESTART_DEAMON
+        app.closeServer();
+        QProcess::startDetached(QString("%1 -d").arg(QString(argv[0])));
+#endif
+        quick_exit(ret);
 #endif
     }else{
         bool isBackendRun = CommandLineManager::instance()->isSet("d");

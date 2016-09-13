@@ -27,8 +27,9 @@ isEmpty(QMAKE_ORGANIZATION_NAME) {
 }
 
 ARCH = $$QMAKE_HOST.arch
-isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
+isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
     DEFINES += ARCH_MIPSEL CLASSICAL_SECTION LOAD_FILE_INTERVAL=150
+    DEFINES += AUTO_RESTART_DEAMON
 }
 
 isEmpty(PREFIX){
@@ -324,13 +325,12 @@ isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
     dde-mips-shs.path = $$BINDIR
     dde-mips-shs.files = $$PWD/mips/dde-computer.sh \
                          $$PWD/mips/dde-trash.sh \
-                         $$PWD/mips/file-manager-daemon.sh \
                          $$PWD/mips/file-manager.sh
 
-    file_manager_daemon_autostart.path = /etc/xdg/autostart
-    file_manager_daemon_autostart.files = $$PWD/mips/file-manager-daemon-autostart.desktop
+    dde-file-manager-autostart.path = /etc/xdg/autostart
+    dde-file-manager-autostart.files = $$PWD/mips/dde-file-manager-autostart.desktop
 
-    INSTALLS += dde-mips-shs file_manager_daemon_autostart
+    INSTALLS += dde-mips-shs dde-file-manager-autostart
 }else{
     xdg_autostart.path = /etc/xdg/autostart
     xdg_autostart.files = dde-file-manager-xdg-autostart.desktop

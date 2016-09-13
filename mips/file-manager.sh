@@ -10,7 +10,11 @@ if [ "$process" == "" ]; then
 	fi
 else
 	if [[ $# -ge 1 ]]; then
-		echo "{\"url\":\"$1\"}" |socat - $XDG_RUNTIME_DIR/dde-file-manager
+		if [[ "$1" == "--new-window" || "$1" == "-n" ]]; then
+			echo "{\"url\":\"\~\", \"isNewWindow\": true}" |socat - $XDG_RUNTIME_DIR/dde-file-manager
+		else
+			echo "{\"url\":\"$1\"}" |socat - $XDG_RUNTIME_DIR/dde-file-manager
+		fi
 	else
 		echo "{\"url\":\"\~\"}" |socat - $XDG_RUNTIME_DIR/dde-file-manager
 	fi
