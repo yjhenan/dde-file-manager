@@ -76,8 +76,11 @@ int main(int argc, char *argv[])
 
         app.setApplicationDisplayName(QObject::tr("Deepin File Manager"));
 
-        if (!isBackendRun)
+        if (!isBackendRun){
             fileManagerApp->show(commandlineUrl);
+        }else{
+            fileManagerApp->runCacheTask();
+        }
 
         QTranslator translator_qt;
         if (translator_qt.load(QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qt_" + QLocale::system().name() + ".qm"))
