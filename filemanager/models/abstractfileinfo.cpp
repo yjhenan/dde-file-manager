@@ -61,8 +61,8 @@ AbstractFileInfo::AbstractFileInfo(const DUrl &url)
     data->fileInfo.setFile(url.path());
 
     init();
-//    updateFileMetaData();
-    updateFileInfo();
+    updateFileMetaData();
+//    updateFileInfo();
 }
 
 AbstractFileInfo::AbstractFileInfo(const QString &url)
@@ -72,8 +72,8 @@ AbstractFileInfo::AbstractFileInfo(const QString &url)
     data->fileInfo.setFile(data->url.path());
 
     init();
-//    updateFileMetaData();
-    updateFileInfo();
+    updateFileMetaData();
+//    updateFileInfo();
 }
 
 AbstractFileInfo::~AbstractFileInfo()
@@ -86,8 +86,8 @@ void AbstractFileInfo::setUrl(const DUrl &url)
     data->url = url;
     data->fileInfo.setFile(url.path());
 
-//    updateFileMetaData();
-    updateFileInfo();
+    updateFileMetaData();
+//    updateFileInfo();
 }
 
 bool AbstractFileInfo::exists() const

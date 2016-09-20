@@ -1881,6 +1881,7 @@ void DFileView::showEmptyAreaMenu()
 {
     const QModelIndex &index = rootIndex();
     const AbstractFileInfoPointer &info = model()->fileInfo(index);
+    info->updateFileInfo();
 
     const QVector<MenuAction> &actions = info->menuActionList(AbstractFileInfo::SpaceArea);
 
@@ -1958,6 +1959,7 @@ void DFileView::showNormalMenu(const QModelIndex &index)
     DFileMenu* menu;
 
     const AbstractFileInfoPointer &info = model()->fileInfo(index);
+    info->updateFileInfo();
 
     if (list.length() == 1) {
         const QVector<MenuAction> &actions = info->menuActionList(AbstractFileInfo::SingleFile);
