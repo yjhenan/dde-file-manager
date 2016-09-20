@@ -4,6 +4,8 @@
 #include <QIcon>
 #include "../app/singleapplication.h"
 #include "utils/utils.h"
+#include "udisklistener.h"
+#include "../widgets/singleton.h"
 
 
 UDiskDeviceInfo::UDiskDeviceInfo()
@@ -62,6 +64,9 @@ QString UDiskDeviceInfo::getId() const
 
 QString UDiskDeviceInfo::getName() const
 {
+    QString letter = deviceListener->getVolumeLetters().value(getId().toLower());
+    if (!letter.isEmpty())
+        return QString("%1 (%2:)").arg(m_diskInfo.Name, letter);
     return m_diskInfo.Name;
 }
 
@@ -187,8 +192,9 @@ qint64 UDiskDeviceInfo::size() const
 
 QString UDiskDeviceInfo::displayName() const
 {
-    if (!m_diskInfo.Name.isEmpty()){
-        return m_diskInfo.Name;
+    QString displayName = getName();
+    if (!displayName.isEmpty()){
+        return displayName;
     }
     return FileUtils::formatSize(m_diskInfo.Total * 1024);
 }
