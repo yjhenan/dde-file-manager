@@ -14,6 +14,7 @@
 #include "../app/global.h"
 #include "../app/fmevent.h"
 #include "../app/filesignalmanager.h"
+#include "../controllers/fileservices.h"
 
 #include "utils/xutil.h"
 #include "utils/xutil.h"
@@ -193,6 +194,7 @@ void DFileManagerWindow::initConnect()
 
     connect(fileSignalManager, &FileSignalManager::fetchNetworksSuccessed, this, &DFileManagerWindow::cd);
     connect(fileSignalManager, &FileSignalManager::requestChangeCurrentUrl,this, &DFileManagerWindow::preHandleCd);
+    connect(fileService, &FileServices::childrenRemoved, m_toolbar, &DToolBar::dirDeleted);
 }
 
 DUrl DFileManagerWindow::currentUrl() const
