@@ -40,22 +40,22 @@
 <context>
     <name>ComputerView</name>
     <message>
-        <location filename="../filemanager/views/computerview.cpp" line="290"/>
+        <location filename="../filemanager/views/computerview.cpp" line="297"/>
         <source>My Directories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/views/computerview.cpp" line="296"/>
+        <location filename="../filemanager/views/computerview.cpp" line="303"/>
         <source>Internal Disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/views/computerview.cpp" line="302"/>
+        <location filename="../filemanager/views/computerview.cpp" line="309"/>
         <source>External Disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/views/computerview.cpp" line="362"/>
+        <location filename="../filemanager/views/computerview.cpp" line="375"/>
         <source>Disk</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,22 +81,22 @@
 <context>
     <name>DBookmarkScene</name>
     <message>
-        <location filename="../filemanager/views/dbookmarkscene.cpp" line="76"/>
+        <location filename="../filemanager/views/dbookmarkscene.cpp" line="77"/>
         <source>Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/views/dbookmarkscene.cpp" line="77"/>
+        <location filename="../filemanager/views/dbookmarkscene.cpp" line="78"/>
         <source>Trash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/views/dbookmarkscene.cpp" line="78"/>
+        <location filename="../filemanager/views/dbookmarkscene.cpp" line="79"/>
         <source>Disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/views/dbookmarkscene.cpp" line="79"/>
+        <location filename="../filemanager/views/dbookmarkscene.cpp" line="80"/>
         <source>Computers in LAN</source>
         <translation type="unfinished"></translation>
     </message>
@@ -137,27 +137,27 @@
 <context>
     <name>DFileSystemModel</name>
     <message>
-        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="291"/>
+        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="299"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="293"/>
+        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="301"/>
         <source>Time modified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="295"/>
+        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="303"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="297"/>
+        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="305"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="299"/>
+        <location filename="../filemanager/models/dfilesystemmodel.cpp" line="307"/>
         <source>Time created</source>
         <translation type="unfinished"></translation>
     </message>
@@ -165,8 +165,8 @@
 <context>
     <name>DLeftSideBar</name>
     <message>
-        <location filename="../filemanager/views/dleftsidebar.cpp" line="101"/>
-        <location filename="../filemanager/views/dleftsidebar.cpp" line="200"/>
+        <location filename="../filemanager/views/dleftsidebar.cpp" line="104"/>
+        <location filename="../filemanager/views/dleftsidebar.cpp" line="203"/>
         <source>File Manager</source>
         <translation type="unfinished"></translation>
     </message>
@@ -235,7 +235,7 @@
 <context>
     <name>DToolBar</name>
     <message>
-        <location filename="../filemanager/views/dtoolbar.cpp" line="198"/>
+        <location filename="../filemanager/views/dtoolbar.cpp" line="192"/>
         <source>Search or enter address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -243,117 +243,117 @@
 <context>
     <name>DialogManager</name>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="191"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="203"/>
         <source>Do you wan to run %1 or display its content?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="192"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="204"/>
         <source>It is an executable text file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="195"/>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="234"/>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="274"/>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="365"/>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="384"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="207"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="246"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="286"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="377"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="396"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="195"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="207"/>
         <source>Run</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="195"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="207"/>
         <source>Run in terminal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="195"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="207"/>
         <source>Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="215"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="227"/>
         <source>&quot;%1&quot; already exists, please use another name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="217"/>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="384"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="229"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="396"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="228"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="240"/>
         <source>Are you sure to empty %1 item?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="229"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="241"/>
         <source>Permanently delete %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="230"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="242"/>
         <source>Permanently delete %1 items?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="234"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="246"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="240"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="252"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="262"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="274"/>
         <source>This action cannot be restored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="272"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="284"/>
         <source>Sorry, unable to locate your bookmark directory, remove it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="274"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="286"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="363"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="375"/>
         <source>Disk file is being used, can not unmount now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="365"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="377"/>
         <source>Force unmount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="381"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="393"/>
         <source>%1 that this shortcut refers to has been changed or moved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="382"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="394"/>
         <source>Do you want to delete this shortcut？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="403"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="415"/>
         <source>Version:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="404"/>
+        <location filename="../filemanager/dialogs/dialogmanager.cpp" line="416"/>
         <source>File Manager is a file management tool independently developed by Deepin Technology, featured with searching, copying, trash, compression/decompression, file property and other file management functions. </source>
         <translation type="unfinished"></translation>
     </message>
@@ -361,12 +361,12 @@
 <context>
     <name>FileController</name>
     <message>
-        <location filename="../filemanager/controllers/filecontroller.cpp" line="327"/>
+        <location filename="../filemanager/controllers/filecontroller.cpp" line="298"/>
         <source>New Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/filecontroller.cpp" line="339"/>
+        <location filename="../filemanager/controllers/filecontroller.cpp" line="310"/>
         <source>New File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,22 +374,27 @@
 <context>
     <name>FileJob</name>
     <message>
-        <location filename="../filemanager/controllers/filejob.cpp" line="283"/>
+        <location filename="../filemanager/controllers/filejob.cpp" line="54"/>
+        <source>copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/controllers/filejob.cpp" line="315"/>
         <source>%1 s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/filejob.cpp" line="287"/>
+        <location filename="../filemanager/controllers/filejob.cpp" line="319"/>
         <source>%1 m %2 s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/filejob.cpp" line="293"/>
+        <location filename="../filemanager/controllers/filejob.cpp" line="325"/>
         <source>%1 h %2 m %3 s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/filejob.cpp" line="302"/>
+        <location filename="../filemanager/controllers/filejob.cpp" line="334"/>
         <source>%1 d %2 h %3 m %4 s</source>
         <translation type="unfinished"></translation>
     </message>
@@ -595,32 +600,32 @@
 <context>
     <name>PathManager</name>
     <message>
-        <location filename="../filemanager/controllers/pathmanager.cpp" line="26"/>
+        <location filename="../filemanager/controllers/pathmanager.cpp" line="32"/>
         <source>Desktop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/pathmanager.cpp" line="27"/>
+        <location filename="../filemanager/controllers/pathmanager.cpp" line="33"/>
         <source>Videos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/pathmanager.cpp" line="28"/>
+        <location filename="../filemanager/controllers/pathmanager.cpp" line="34"/>
         <source>Music</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/pathmanager.cpp" line="29"/>
+        <location filename="../filemanager/controllers/pathmanager.cpp" line="35"/>
         <source>Pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/pathmanager.cpp" line="30"/>
+        <location filename="../filemanager/controllers/pathmanager.cpp" line="36"/>
         <source>Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/pathmanager.cpp" line="31"/>
+        <location filename="../filemanager/controllers/pathmanager.cpp" line="37"/>
         <source>Downloads</source>
         <translation type="unfinished"></translation>
     </message>
@@ -986,88 +991,88 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="290"/>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="292"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="294"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="296"/>
         <source>newDoc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="299"/>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="301"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="303"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="305"/>
         <source>newExcel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="308"/>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="310"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="312"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="314"/>
         <source>newPowerPoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="317"/>
-        <location filename="../filemanager/controllers/appcontroller.cpp" line="319"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="321"/>
+        <location filename="../filemanager/controllers/appcontroller.cpp" line="323"/>
         <source>newText</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="219"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="225"/>
         <source>Local disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="221"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="227"/>
         <source>Removable disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="223"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="229"/>
         <source>Network shared directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="225"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="231"/>
         <source>Android mobile device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="227"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="233"/>
         <source>Apple mobile device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="229"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="235"/>
         <source>Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="231"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="237"/>
         <source>Dvd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="233"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="239"/>
         <source>Unknown device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="239"/>
-        <location filename="../filemanager/models/abstractfileinfo.cpp" line="303"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="245"/>
+        <location filename="../filemanager/models/abstractfileinfo.cpp" line="306"/>
         <source>%1 item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="241"/>
-        <location filename="../filemanager/models/abstractfileinfo.cpp" line="305"/>
+        <location filename="../deviceinfo/udiskdeviceinfo.cpp" line="247"/>
+        <location filename="../filemanager/models/abstractfileinfo.cpp" line="308"/>
         <source>%1 items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/shutil/fileutils.cpp" line="518"/>
+        <location filename="../filemanager/shutil/fileutils.cpp" line="511"/>
         <source>Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/shutil/fileutils.cpp" line="567"/>
+        <location filename="../filemanager/shutil/fileutils.cpp" line="560"/>
         <source>Create symlink</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1089,27 +1094,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/main.cpp" line="87"/>
-        <source>File Manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../filemanager/models/abstractfileinfo.cpp" line="595"/>
+        <location filename="../filemanager/models/abstractfileinfo.cpp" line="598"/>
         <source>Loading...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/models/fileinfo.cpp" line="95"/>
+        <location filename="../filemanager/models/fileinfo.cpp" line="89"/>
         <source>File has been moved or deleted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/models/fileinfo.cpp" line="97"/>
+        <location filename="../filemanager/models/fileinfo.cpp" line="91"/>
         <source>You do not have permission to access this folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../filemanager/models/fileinfo.cpp" line="100"/>
+        <location filename="../filemanager/models/fileinfo.cpp" line="94"/>
         <source>Folder is empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1127,6 +1127,299 @@
     <message>
         <location filename="../filemanager/models/searchfileinfo.cpp" line="414"/>
         <source>No results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/main.cpp" line="77"/>
+        <source>Deepin File Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Shortcut</name>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="10"/>
+        <source>Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="11"/>
+        <source>Select to the first item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="11"/>
+        <source>Shift + Home </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="12"/>
+        <source>Select to the last item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="12"/>
+        <source>Shift + End </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="13"/>
+        <source>Select leftwards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="13"/>
+        <source>Shift + Left </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="14"/>
+        <source>Select rightwards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="14"/>
+        <source>Shift + Right </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="15"/>
+        <source>Select to upper row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="15"/>
+        <source>Shift + Up </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="16"/>
+        <source>Select to lower row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="16"/>
+        <source>Shift + Down </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="17"/>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="17"/>
+        <source>Ctrl + Down </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="18"/>
+        <source>To parent directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="18"/>
+        <source>Ctrl + Up </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="19"/>
+        <source>Permanently delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="19"/>
+        <source>Shift + Delete </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="20"/>
+        <source>Delete file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="20"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="21"/>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="21"/>
+        <source>Ctrl + a </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="22"/>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="22"/>
+        <source>Ctrl + c </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="23"/>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="23"/>
+        <source>Ctrl + x </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="24"/>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="24"/>
+        <source>Ctrl + v </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="25"/>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="25"/>
+        <source>F2 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="26"/>
+        <source>New/Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="27"/>
+        <source>New window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="27"/>
+        <source>Ctrl + n </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="28"/>
+        <source>New folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="28"/>
+        <source>Ctrl + Shift + n </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="29"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="29"/>
+        <source>Ctrl + f</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="30"/>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="31"/>
+        <source>Item information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="31"/>
+        <source>Ctrl + i </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="32"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="32"/>
+        <source>F1 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="33"/>
+        <source>Keyboard shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="33"/>
+        <source>Ctrl + Shift + / </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="34"/>
+        <source>Switch display status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="35"/>
+        <source>Hide item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="35"/>
+        <source>Ctrl + h </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="36"/>
+        <source>Input in address bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="36"/>
+        <source>Ctrl + l </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="37"/>
+        <source>Others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="38"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="38"/>
+        <source>Alt + F4 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="39"/>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="39"/>
+        <source>Alt + left </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="40"/>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemanager/shutil/shortcut.cpp" line="40"/>
+        <source>Alt + right </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
