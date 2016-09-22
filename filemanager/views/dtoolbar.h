@@ -59,6 +59,7 @@ public slots:
     void handleHotkeyCtrlL(const FMEvent &event);
 
     void setViewModeButtonVisible(bool isVisible);
+    void dirDeleted(const DUrl& url);
 
 private:
     void checkNavHistory(DUrl url);

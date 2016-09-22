@@ -238,6 +238,10 @@ void DToolBar::searchBarTextEntered()
     DUrl inputUrl = DUrl::fromUserInput(text);
 
     event = inputUrl;
+    if(inputUrl.isLocalFile()){
+        if(!QDir(inputUrl.path()).exists())
+            return;
+    }
     qDebug() << event << inputUrl << text;
 
     if (!m_searchBar->hasScheme()) {
@@ -394,6 +398,19 @@ void DToolBar::setViewModeButtonVisible(bool isVisible)
 {
     m_iconViewButton->setVisible(isVisible);
     m_listViewButton->setVisible(isVisible);
+}
+
+void DToolBar::dirDeleted(const DUrl &url)
+{
+    if(m_crumbWidget->getUrl().path().startsWith(url.path())){
+        m_crumbWidget->setCrumb(url.parentUrl());
+
+        FMEvent event;
+        event = WindowManager::getWindowId(window());
+        event = FMEvent::CrumbButton;
+        event = url.parentUrl();
+        emit m_crumbWidget->crumbSelected(event);
+    }
 }
 
 void DToolBar::checkNavHistory(DUrl url)
