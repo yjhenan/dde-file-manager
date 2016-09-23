@@ -29,7 +29,7 @@ public:
 
     static int FileJobCount;
 
-    static QMap<DUrl, int> SelectedFiles;
+    static QPair<DUrl, int> selectionAndRenameFile;
     void setStatus(Status status);
     explicit FileJob(const QString &title, QObject *parent = 0);
     void setJobId(const QString &id);

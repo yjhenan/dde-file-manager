@@ -15,7 +15,7 @@
 #include <QProcess>
 #include <QCryptographicHash>
 
-QMap<DUrl, int> FileJob::SelectedFiles;
+QPair<DUrl, int> FileJob::selectionAndRenameFile;
 
 int FileJob::FileJobCount = 0;
 
