@@ -58,6 +58,9 @@ void DialogManager::initTaskDialog()
     m_taskDialog = new DTaskDialog;
     m_taskDialog->setWindowIcon(QIcon(":/images/images/dde-file-manager.svg"));
     m_taskDialog->setStyleSheet(getQssFromFile(":/qss/dialogs/qss/light.qss"));
+    m_updateJobTaskTimer = new QTimer;
+    m_updateJobTaskTimer->setInterval(1000);
+    connect(m_updateJobTaskTimer, &QTimer::timeout, this, &DialogManager::updateJob);
 }
 
 void DialogManager::initCloseIndicatorDialog()
@@ -77,6 +80,10 @@ void DialogManager::initConnect()
     connect(fileSignalManager, &FileSignalManager::jobDataUpdated, m_taskDialog, &DTaskDialog::handleUpdateTaskWidget);
     connect(fileSignalManager, &FileSignalManager::requestAbortJob, this, &DialogManager::abortJobByDestinationUrl);
     connect(fileSignalManager, &FileSignalManager::abortTask, m_taskDialog, &DTaskDialog::abortTask);
+
+    connect(fileSignalManager, &FileSignalManager::requestStartUpdateJobTimer, this, &DialogManager::startUpdateJobTimer);
+    connect(fileSignalManager, &FileSignalManager::requestStopUpdateJobTimer, this, &DialogManager::stopUpdateJobTimer);
+
 
     connect(fileSignalManager, &FileSignalManager::conflictDialogShowed, m_taskDialog, &DTaskDialog::showConflictDiloagByJob);
     connect(m_taskDialog, &DTaskDialog::conflictShowed, fileSignalManager, &FileSignalManager::conflictTimerStoped);
@@ -154,19 +161,42 @@ QPoint DialogManager::getPerportyPos(int dialogWidth, int dialogHeight, int coun
 void DialogManager::addJob(FileJob *job)
 {
     m_jobs.insert(job->getJobId(), job);
+    emit fileSignalManager->requestStartUpdateJobTimer();
 }
 
 
 void DialogManager::removeJob(const QString &jobId)
 {
     m_jobs.remove(jobId);
+    if (m_jobs.count() == 0){
+        emit fileSignalManager->requestStopUpdateJobTimer();
+    }
 }
 
-void DialogManager::showTaskDialog()
+void DialogManager::updateJob()
 {
-    m_taskDialog->show();
+    foreach (QString jobId, m_jobs.keys()) {
+        FileJob* job = m_jobs.value(jobId);
+        if (job->currentMsec() - job->lastMsec() > FileJob::Msec_For_Display){
+            if (!job->isJobAdded()){
+                job->jobAdded();
+                job->jobUpdated();
+            }else{
+                job->jobUpdated();
+            }
+        }
+    }
 }
 
+void DialogManager::startUpdateJobTimer()
+{
+    m_updateJobTaskTimer->start();
+}
+
+void DialogManager::stopUpdateJobTimer()
+{
+    m_updateJobTaskTimer->stop();
+}
 
 void DialogManager::abortJob(const QMap<QString, QString> &jobDetail)
 {

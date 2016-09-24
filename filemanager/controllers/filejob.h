@@ -30,6 +30,11 @@ public:
     static int FileJobCount;
 
     static QPair<DUrl, int> selectionAndRenameFile;
+
+    static qint64 Msec_For_Display;
+    static qint64 Data_Block_Size;
+    static qint64 Data_Flush_Size;
+
     void setStatus(Status status);
     explicit FileJob(const QString &title, QObject *parent = 0);
     void setJobId(const QString &id);
@@ -41,6 +46,11 @@ public:
     int getWindowId();
 
     QString getTargetDir();
+
+    inline QMap<QString, QString> jobDetail(){ return m_jobDetail; }
+    inline qint64 currentMsec() { return m_timer.elapsed(); }
+    inline qint64 lastMsec() { return m_lastMsec; }
+    inline bool isJobAdded() { return m_isJobAdded; }
 
 signals:
     void progressPercent(int value);
@@ -82,8 +92,7 @@ private:
     QString m_srcPath;
     QString m_tarPath;
     QElapsedTimer m_timer;
-    qint64 lastMsec;
-    qint64 currentMsec;
+    qint64 m_lastMsec;
     bool m_applyToAll  = false;
     bool m_isReplaced = false;
     QString m_title;

@@ -31,12 +31,15 @@ public:
     void initTranslation();
     void initConnect();
 
+    QString getFileJobConfigPath();
+
     AppController *getAppController() const;
 
 public slots:
     void show(const DUrl& url);
     void lazyRunCacheTask();
     void runCacheTask();
+    void loadFileJobConfig();
 
 private:
     WindowManager* m_windowManager = NULL;
