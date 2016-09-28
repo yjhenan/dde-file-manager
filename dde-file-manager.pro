@@ -32,6 +32,10 @@ isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
     DEFINES += AUTO_RESTART_DEAMON
 }
 
+isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
+    DEFINES += SPLICE_CP
+}
+
 isEmpty(PREFIX){
     PREFIX = /usr
 }

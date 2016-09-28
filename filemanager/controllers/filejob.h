@@ -37,6 +37,7 @@ public:
 
     void setStatus(Status status);
     explicit FileJob(const QString &title, QObject *parent = 0);
+    ~FileJob();
     void setJobId(const QString &id);
     QString getJobId();
     QString checkDuplicateName(const QString &name);
@@ -97,7 +98,8 @@ private:
     bool m_isReplaced = false;
     QString m_title;
     int m_windowId = -1;
-
+    int m_filedes[2] = {0, 0};
+    bool m_isInSameDisk = true;
 
 
     bool copyFile(const QString &srcFile, const QString &tarDir, bool isMoved=false, QString *targetPath = 0);
