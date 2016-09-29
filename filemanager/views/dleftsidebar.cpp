@@ -288,6 +288,7 @@ void DLeftSideBar::loadBookmark()
     {
         BookMark * bm = m_list.at(i);
         DBookmarkItem * item = DBookmarkItem::makeBookmark(bm->getName(), bm->getUrl());
+        item->setBookmarkModel(bm);
         m_scene->addItem(item);
     }
 }

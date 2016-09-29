@@ -101,11 +101,13 @@ void DBookmarkItem::editFinished()
     FMEvent event;
     event = windowId();
     event = m_url;
+    if(m_group)
+        event.setBookmarkIndex(m_group->items()->indexOf(this));
 
     if (!m_lineEdit->text().isEmpty() && m_lineEdit->text() != m_textContent)
     {
-        bookmarkManager->renameBookmark(m_textContent, m_lineEdit->text(), m_url);
-        fileSignalManager->bookmarkRenamed(m_textContent, m_lineEdit->text(), event);
+        bookmarkManager->renameBookmark(getBookmarkModel(), m_lineEdit->text());
+        fileSignalManager->bookmarkRenamed(m_lineEdit->text(), event);
         m_textContent = m_lineEdit->text();
     }
 
@@ -447,6 +449,16 @@ int DBookmarkItem::windowId()
     return WindowManager::getWindowId(scene()->views().at(0)->window());
 }
 
+BookMark *DBookmarkItem::getBookmarkModel()
+{
+    return m_bookmarkModel;
+}
+
+void DBookmarkItem::setBookmarkModel(BookMark *bookmark)
+{
+    m_bookmarkModel = bookmark;
+}
+
 DBookmarkItem *DBookmarkItem::makeBookmark(const QString &name, const DUrl &url)
 {
     DBookmarkItem * item = new DBookmarkItem;
@@ -711,6 +723,8 @@ void DBookmarkItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     fmEvent = urls;
     fmEvent = windowId();
     fmEvent = FMEvent::LeftSideBar;
+    if(m_group)
+        fmEvent.setBookmarkIndex(m_group->items()->indexOf(this));
 
     menu->setEvent(fmEvent);
 
