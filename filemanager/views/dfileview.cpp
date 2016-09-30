@@ -676,6 +676,9 @@ bool DFileView::select(const FMEvent &event)
 
         if (index.isValid()) {
             selectionModel()->select(index, QItemSelectionModel::Select);
+        } else {
+            preSelectionUrls << url;
+            continue;
         }
 
         if (!firstIndex.isValid())
@@ -1482,6 +1485,15 @@ void DFileView::rowsAboutToBeRemoved(const QModelIndex &parent, int start, int e
 void DFileView::rowsInserted(const QModelIndex &parent, int start, int end)
 {
     DListView::rowsInserted(parent, start, end);
+
+    for (const DUrl &url : preSelectionUrls) {
+        const QModelIndex &index = model()->index(url);
+
+        if (index.isValid()) {
+            selectionModel()->select(index, QItemSelectionModel::Select);
+            preSelectionUrls.removeOne(url);
+        }
+    }
 }
 
 bool DFileView::isEmptyArea(const QModelIndex &index, const QPoint &pos) const
