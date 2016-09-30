@@ -573,8 +573,8 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
                         m_bytesCopied = m_totalSize;
                     }
 
-//                    to.flush();
-                    fsync(out_fd);
+                    to.flush();
+//                    fsync(out_fd);
                     from.close();
                     to.close();
 
