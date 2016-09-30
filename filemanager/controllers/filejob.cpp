@@ -369,9 +369,9 @@ void FileJob::jobUpdated()
 
     m_bytesPerSec /= m_factor;
 
-//    if (currentMsec < 1000)
-//        return;
-//    m_bytesPerSec = m_bytesCopied / ( currentMsec / 1000 );
+    if (m_bytesPerSec == 0){
+        return;
+    }
 
     QMap<QString, QString> jobDataDetail;
     if(m_bytesPerSec > 0)
@@ -507,7 +507,7 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
     loff_t in_off = 0;
     loff_t out_off = 0;
     int buf_size = 16 * 1024;
-    off_t len = 0;
+    qint64 len = 0;
     ssize_t err = -1;
     int in_fd = 0;
     int out_fd = 0;
@@ -572,7 +572,9 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
                     if ((m_totalSize - m_bytesCopied) <= 1){
                         m_bytesCopied = m_totalSize;
                     }
-                    to.flush();
+
+//                    to.flush();
+                    fsync(out_fd);
                     from.close();
                     to.close();
 
@@ -609,6 +611,12 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
 
                 m_bytesCopied += buf_size;
                 m_bytesPerSec += buf_size;
+
+                if (!m_isInSameDisk){
+                    if (m_bytesCopied % (Data_Flush_Size) == 0){
+                        fsync(out_fd);
+                    }
+                }
 #else
                 if(from.atEnd())
                 {
@@ -630,7 +638,7 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
                 to.write(block, inBytes);
                 m_bytesCopied += inBytes;
                 m_bytesPerSec += inBytes;
-#endif
+
                 if (!m_isInSameDisk){
                     if (m_bytesCopied % (Data_Flush_Size) == 0){
                         to.flush();
@@ -643,6 +651,7 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
                         }
                     }
                 }
+#endif
                 break;
             }
             case FileJob::Paused:
