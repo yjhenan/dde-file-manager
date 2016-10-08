@@ -351,6 +351,19 @@ QString FileMenuManager::getActionString(MenuAction type)
     return "";
 }
 
+void FileMenuManager::setActionString(MenuAction type, QString actionString)
+{
+    if (!m_actionKeys.contains(type)){
+        m_actionKeys.insert(type, actionString);
+
+        DAction* action = new DAction(actionString, 0);
+        action->setData(type);
+        m_actions.insert(type, action);
+
+        qDebug() << type << actionString << action;
+    }
+}
+
 void FileMenuManager::actionTriggered(DAction *action)
 {
     DFileMenu *menu = qobject_cast<DFileMenu *>(sender());

@@ -50,6 +50,12 @@ include(./simpleini/simpleini.pri)
 include($$PWD/chinese2pinyin/chinese2pinyin.pri)
 include($$PWD/xdnd/xdnd.pri)
 
+isEqual(ARCH, sw_64){
+    DEFINES += SW_LABEL
+    include(./sw_label/sw_label.pri)
+    LIBS += -lfilemanager -lllsdeeplabel
+}
+
 PKGCONFIG += x11 gtk+-2.0 xcb xcb-ewmh gsettings-qt libudev x11 xext libsecret-1 gio-unix-2.0 libstartup-notification-1.0 xcb-aux
 CONFIG += c++11 link_pkgconfig
 #DEFINES += QT_NO_DEBUG_OUTPUT
@@ -339,4 +345,10 @@ isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
     xdg_autostart.path = /etc/xdg/autostart
     xdg_autostart.files = dde-file-manager-xdg-autostart.desktop
     INSTALLS += xdg_autostart
+}
+
+isEqual(ARCH, sw_64){
+    sw_label.path = /usr/lib/sw_64-linux-gnu/
+    sw_label.files = sw_label/*.so
+    INSTALLS += sw_label
 }

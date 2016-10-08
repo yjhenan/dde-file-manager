@@ -70,6 +70,12 @@ public:
         ExtendView,
         SetAsWallpaper,
         ForgetPassword,
+#ifdef SW_LABEL
+        SetLabel,
+        ViewLabel,
+        EditLabel,
+        PrivateFileToPublic,
+#endif
         Unknow
     };
 

@@ -570,6 +570,14 @@ QList<QIcon> DFileView::fileAdditionalIcon(const QModelIndex &index) const
     if (!fileInfo->isReadable())
         icons << unreadableIcon;
 
+#ifdef SW_LABEL
+    QString labelIconPath = fileInfo->getLabelIcon();
+    if (!labelIconPath.isEmpty()){
+        icons << lockIcon;
+        icons << QIcon(labelIconPath);
+    }
+#endif
+
     return icons;
 }
 

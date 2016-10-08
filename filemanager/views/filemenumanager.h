@@ -45,6 +45,7 @@ public:
                                          bool checkable = false,
                                          const QMap<MenuAction, QVector<MenuAction> > &subMenuList = QMap<MenuAction, QVector<MenuAction> >());
     static QString getActionString(MenuAction type);
+    static void setActionString(MenuAction type, QString actionString);
 
 private:
     static void initData();

@@ -35,6 +35,11 @@
 #include <qprocess.h>
 #include "../shutil/shortcut.h"
 
+#ifdef SW_LABEL
+#include "sw_label/filemanager.h"
+#endif
+
+
 AppController::AppController(QObject *parent) : QObject(parent)
 {
     FileServices::instance()->setFileUrlHandler(RECENT_SCHEME, "", new RecentHistoryManager(this));
@@ -533,6 +538,36 @@ void AppController::actionForgetPassword(const FMEvent &event)
     }
     actionUnmount(event);
 }
+
+#ifdef SW_LABEL
+void AppController::actionSetLabel(const FMEvent &event)
+{
+    std::string path = event.fileUrl().toLocalFile().toStdString();
+    auto_operation(const_cast<char*>(path.c_str()), "020100");
+    qDebug() << "020100" << "set label";
+}
+
+void AppController::actionViewLabel(const FMEvent &event)
+{
+    std::string path = event.fileUrl().toLocalFile().toStdString();
+    auto_operation(const_cast<char*>(path.c_str()), "010101");
+    qDebug() << "010101" << "view label";
+}
+
+void AppController::actionEditLabel(const FMEvent &event)
+{
+    std::string path = event.fileUrl().toLocalFile().toStdString();
+    auto_operation(const_cast<char*>(path.c_str()), "010201");
+    qDebug() << "010201" << "edit label";
+}
+
+void AppController::actionPrivateFileToPublic(const FMEvent &event)
+{
+    std::string path = event.fileUrl().toLocalFile().toStdString();
+    auto_operation(const_cast<char*>(path.c_str()), "010501");
+    qDebug() << "010501" << "private file to public";
+}
+#endif
 
 void AppController::doSubscriberAction(const QString &path)
 {

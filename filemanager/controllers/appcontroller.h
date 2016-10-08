@@ -84,6 +84,12 @@ public slots:
 
     void actionForgetPassword(const FMEvent& event);
 
+#ifdef SW_LABEL
+    void actionSetLabel(const FMEvent& event);
+    void actionViewLabel(const FMEvent& event);
+    void actionEditLabel(const FMEvent& event);
+    void actionPrivateFileToPublic(const FMEvent& event);
+#endif
     // Subscriber interface
 public:
     void doSubscriberAction(const QString &path);
