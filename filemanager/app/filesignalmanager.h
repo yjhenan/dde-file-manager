@@ -61,7 +61,10 @@ signals:
 
     /*copy/move job conflict dialog show */
     void conflictDialogShowed(const QMap<QString, QString>& jobDetail);
-
+#ifdef SW_LABEL
+    /*copy/move/delete fail job show */
+    void jobFailed(int nRet, const QString &jobType, const QString& srcFileName);
+#endif
     /*conflictTimer in move/copy job  stop when conflict dialog showed*/
     void conflictTimerStoped(const QMap<QString, QString>& jobDetail);
 

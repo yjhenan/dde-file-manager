@@ -580,13 +580,28 @@ QList<QIcon> DFileView::fileAdditionalIcon(const QModelIndex &index) const
 #ifdef SW_LABEL
     QString labelIconPath = fileInfo->getLabelIcon();
     if (!labelIconPath.isEmpty()){
-        icons << lockIcon;
         icons << QIcon(labelIconPath);
+//        qDebug() << labelIconPath;
     }
 #endif
 
     return icons;
 }
+
+#ifdef SW_LABEL
+bool DFileView::checkRenamePrivilege_sw(DUrl fileUrl)
+{
+    QString srcFileName = fileUrl.toLocalFile();
+    if (FileJob::isLabelFile(srcFileName)){
+        int nRet = FileJob::checkRenamePrivilege(srcFileName);
+        if (nRet != 0){
+            emit fileSignalManager->jobFailed(nRet, "rename", srcFileName);
+            return false;
+        }
+    }
+    return true;
+}
+#endif
 
 void DFileView::preHandleCd(const FMEvent &event)
 {
@@ -668,10 +683,28 @@ bool DFileView::edit(const QModelIndex &index, QAbstractItemView::EditTrigger tr
 
         const QRect &file_name_rect = itemDelegate()->fileNameRect(option, index);
 
-        if (!file_name_rect.contains(static_cast<QMouseEvent*>(event)->pos()))
+        if (!file_name_rect.contains(static_cast<QMouseEvent*>(event)->pos())){
             return false;
+        }else{
+#ifdef SW_LABEL
+            bool isCanRename = checkRenamePrivilege_sw(fileUrl);
+            if (!isCanRename)
+                return false;
+#endif
+        }
     }
 
+#ifdef SW_LABEL
+    if (trigger == EditKeyPressed){
+        QKeyEvent* e = static_cast<QKeyEvent*>(event);
+        if (e && e->key() == Qt::Key_F2){
+            qDebug() << trigger << e;
+            bool isCanRename = checkRenamePrivilege_sw(fileUrl);
+            if (!isCanRename)
+                return false;
+        }
+    }
+#endif
     return DListView::edit(index, trigger, event);
 }
 

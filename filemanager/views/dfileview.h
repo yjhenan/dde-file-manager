@@ -113,7 +113,9 @@ public:
     bool isActiveIndex(const QModelIndex &index) const;
 
     QList<QIcon> fileAdditionalIcon(const QModelIndex &index) const;
-
+#ifdef SW_LABEL
+    bool checkRenamePrivilege_sw(DUrl fileUrl);
+#endif
 public slots:
     void preHandleCd(const FMEvent &event);
     void cd(const FMEvent &event);

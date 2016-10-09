@@ -20,6 +20,8 @@
 
 #include "widgets/singleton.h"
 
+#include "filejob.h"
+
 #include <ddialog.h>
 
 #include <QUrl>

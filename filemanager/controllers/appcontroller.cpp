@@ -207,7 +207,6 @@ void AppController::actionRename(const FMEvent &event)
         emit fileSignalManager->requestBookmarkRename(event);
         return;
     }
-
     emit fileSignalManager->requestRename(event);
 }
 

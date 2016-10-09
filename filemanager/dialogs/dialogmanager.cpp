@@ -39,6 +39,10 @@
 #include <QApplication>
 #include <QScreen>
 
+#ifdef SW_LABEL
+#include "sw_label/llsdeeplabel.h"
+#endif
+
 DWIDGET_USE_NAMESPACE
 
 DialogManager::DialogManager(QObject *parent) : QObject(parent)
@@ -84,6 +88,9 @@ void DialogManager::initConnect()
     connect(fileSignalManager, &FileSignalManager::requestStartUpdateJobTimer, this, &DialogManager::startUpdateJobTimer);
     connect(fileSignalManager, &FileSignalManager::requestStopUpdateJobTimer, this, &DialogManager::stopUpdateJobTimer);
 
+#ifdef SW_LABEL
+    connect(fileSignalManager, &FileSignalManager::jobFailed, this, &DialogManager::onJobFailed_SW);
+#endif
 
     connect(fileSignalManager, &FileSignalManager::conflictDialogShowed, m_taskDialog, &DTaskDialog::showConflictDiloagByJob);
     connect(m_taskDialog, &DTaskDialog::conflictShowed, fileSignalManager, &FileSignalManager::conflictTimerStoped);
@@ -547,3 +554,59 @@ void DialogManager::handleConflictRepsonseConfirmed(const QMap<QString, QString>
         }
     }
 }
+
+int DialogManager::showMessageDialog(int messageLevel, const QString& message)
+{
+    DDialog d;
+    d.moveToCenter();
+    d.setTitle(message);
+    QStringList buttonTexts;
+    buttonTexts << tr("确定");
+    d.addButtons(buttonTexts);
+    d.setDefaultButton(0);
+    if (messageLevel == 1){
+        d.setIcon(QIcon(":/images/dialogs/images/dialog_info_64.png"));
+    }else if (messageLevel == 2){
+        d.setIcon(QIcon(":/images/dialogs/images/dialog_warning_64.png"));
+    }else if (messageLevel == 3){
+        d.setIcon(QIcon(":/images/dialogs/images/dialog_error_64.png"));
+    }else{
+        d.setIcon(QIcon(":/images/dialogs/images/dialog_info_64.png"));
+    }
+    int code = d.exec();
+    qDebug() << code;
+    return code;
+}
+
+#ifdef SW_LABEL
+
+void DialogManager::onJobFailed_SW( int nRet, const QString &jobType, const QString &srcfilename)
+{
+    int ret = showPrivilegeDialog_SW(nRet, srcfilename);
+    if (ret == 0){
+        qDebug() << jobType << nRet << srcfilename;
+    }
+}
+
+int DialogManager::showPrivilegeDialog_SW(int nRet, const QString &srcfilename)
+{
+    qDebug() << "文件全路径名称" << srcfilename;
+    qDebug() << "错误码；"<< nRet;
+
+    std::string serrordst=""; //错误描述
+    int nerrorlevel=0;  //错误级别
+    nRet =  lls_geterrordesc(nRet, serrordst, nerrorlevel);
+    if (nRet == 0){
+        qDebug() << "错误描述:" << QString::fromStdString(serrordst);
+        qDebug() << "错误级别:" << nerrorlevel;
+        QString message = QString("%1 %2").arg(QFileInfo(srcfilename).fileName(), QString::fromStdString(serrordst));
+        int code = showMessageDialog(nerrorlevel, message);
+        return code;
+
+    }else{
+        qDebug() << "get error message fail" << nRet;
+        return -1;
+    }
+}
+
+#endif

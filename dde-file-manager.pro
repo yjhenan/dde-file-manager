@@ -52,9 +52,15 @@ include($$PWD/chinese2pinyin/chinese2pinyin.pri)
 include($$PWD/xdnd/xdnd.pri)
 
 isEqual(ARCH, sw_64){
-    DEFINES += SW_LABEL
-    include(./sw_label/sw_label.pri)
-    LIBS += -lfilemanager -lllsdeeplabel
+    isEqual(ENABLE_SW_LABLE, YES){
+        DEFINES += SW_LABEL
+        include(./sw_label/sw_label.pri)
+        LIBS += -L$$PWD/sw_label -lfilemanager -lllsdeeplabel
+
+        sw_label.path = /usr/lib/sw_64-linux-gnu/
+        sw_label.files = $$PWD/sw_label/*.so
+        INSTALLS += sw_label
+    }
 }
 
 PKGCONFIG += x11 gtk+-2.0 xcb xcb-ewmh gsettings-qt libudev x11 xext libsecret-1 gio-unix-2.0 libstartup-notification-1.0 xcb-aux
@@ -349,10 +355,4 @@ isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
     xdg_autostart.path = /etc/xdg/autostart
     xdg_autostart.files = dde-file-manager-xdg-autostart.desktop
     INSTALLS += xdg_autostart
-}
-
-isEqual(ARCH, sw_64){
-    sw_label.path = /usr/lib/sw_64-linux-gnu/
-    sw_label.files = sw_label/*.so
-    INSTALLS += sw_label
 }
