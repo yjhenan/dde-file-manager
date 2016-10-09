@@ -68,7 +68,7 @@ DFileView::DFileView(QWidget *parent) : DListView(parent)
 
 DFileView::~DFileView()
 {
-    disconnect(this, &DFileView::rowCountChanged, this, &DFileView::updateStatusBar);
+    disconnect(this, &DFileView::rowCountChanged, this, &DFileView::onRowCountChanged);
     disconnect(selectionModel(), &QItemSelectionModel::selectionChanged, this, &DFileView::updateStatusBar);
 }
 
@@ -139,7 +139,7 @@ void DFileView::initConnects()
             this, &DFileView::select);
     connect(fileSignalManager, &FileSignalManager::requestSelectRenameFile,
             this, &DFileView::selectAndRename);
-    connect(this, &DFileView::rowCountChanged, this, &DFileView::updateStatusBar);
+    connect(this, &DFileView::rowCountChanged, this, &DFileView::onRowCountChanged);
 
     connect(m_displayAsActionGroup, &QActionGroup::triggered, this, &DFileView::dislpayAsActionTriggered);
     connect(m_sortByActionGroup, &QActionGroup::triggered, this, &DFileView::sortByActionTriggered);
@@ -787,6 +787,15 @@ void DFileView::openWithActionTriggered(QAction *action)
     FileUtils::openFileByApp(url, app);
 }
 
+void DFileView::onRowCountChanged()
+{
+#ifndef CLASSICAL_SECTION
+    static_cast<DFileSelectionModel*>(selectionModel())->m_selectedList.clear();
+#endif
+
+    updateStatusBar();
+}
+
 void DFileView::wheelEvent(QWheelEvent *event)
 {
     if(isIconViewMode() && Global::keyCtrlIsPressed()) {
@@ -1146,9 +1155,7 @@ void DFileView::contextMenuEvent(QContextMenuEvent *event)
         clearSelection();
         showEmptyAreaMenu();
     } else {
-        const QModelIndexList &list = selectedIndexes();
-
-        if (!list.contains(index)) {
+        if (!isSelected(index)) {
             setCurrentIndex(index);
         }
 
