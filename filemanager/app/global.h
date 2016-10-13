@@ -26,6 +26,10 @@
 #define gvfsMountClient Singleton<GvfsMountClient>::instance()
 #define secrectManager Singleton<SecrectManager>::instance()
 
+#ifdef MENU_DIALOG_PLUGIN
+#define pluginManagerApp Singleton<PluginManagerApp>::instance()  // by txx
+#endif
+
 #define defaut_icon ":/images/images/default.png"
 #define defaut_computerIcon ":/images/images/computer.png"
 #define defaut_trashIcon ":/images/images/user-trash-full.png"

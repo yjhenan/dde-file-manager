@@ -30,6 +30,10 @@
 
 #include "widgets/singleton.h"
 
+#ifdef MENU_DIALOG_PLUGIN
+#include "mips/plugin/pluginmanagerapp.h"  // by txx
+#endif
+
 #include <dthememanager.h>
 #include <dscrollbar.h>
 
@@ -559,7 +563,10 @@ QList<QIcon> DFileView::fileAdditionalIcon(const QModelIndex &index) const
 
     if (!fileInfo)
         return icons;
-
+#ifdef MENU_DIALOG_PLUGIN
+    // 调用插件，处理增加的小图标, by  txx
+    pluginManagerApp->fileAdditionalIcon( fileInfo->absoluteFilePath(), icons );
+#endif
     if (fileInfo->isSymLink()) {
         icons << linkIcon;
     }

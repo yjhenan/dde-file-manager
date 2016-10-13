@@ -30,6 +30,10 @@
 #include <QMetaObject>
 #include <QMetaEnum>
 
+#ifdef MENU_DIALOG_PLUGIN
+#include "mips/plugin/pluginmanagerapp.h"  // by txx
+#endif
+
 QMap<MenuAction, QString> FileMenuManager::m_actionKeys;
 QMap<MenuAction, DAction*> FileMenuManager::m_actions;
 QVector<MenuAction> FileMenuManager::m_sortActionTypes;
@@ -291,6 +295,10 @@ void FileMenuManager::initData()
     m_actionKeys[MenuAction::DeletionDate] = QObject::tr("Time deleted");
     m_actionKeys[MenuAction::SourcePath] = QObject::tr("Source path");
     m_actionKeys[MenuAction::AbsolutePath] = QObject::tr("Path");
+
+#ifdef MENU_DIALOG_PLUGIN
+    pluginManagerApp->addPlugActionKeys(m_actionKeys);  //by  txx 增加插件的右键盘菜单项
+#endif
 }
 
 void FileMenuManager::initActions()
@@ -380,6 +388,16 @@ void FileMenuManager::actionTriggered(DAction *action)
             return;
         }
 
+#ifdef MENU_DIALOG_PLUGIN
+        if( type > MenuAction::Unknow )  // by txx 增加对 插件的右键菜单的支持
+        {
+              QMetaObject::invokeMethod(appController,
+                                      "actionCustom",
+                                      Qt::DirectConnection,
+                                      Q_ARG(FMEvent, event), Q_ARG( int, _type ) );
+              return;
+        }
+#endif
         QMetaEnum metaEnum = QMetaEnum::fromType<MenuAction>();
         QString key = metaEnum.valueToKey(type);
         QString methodKey = QString("action%1").arg(key);

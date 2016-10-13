@@ -32,6 +32,10 @@
 #include <gperftools/profiler.h>
 #endif
 
+#ifdef MENU_DIALOG_PLUGIN
+#include "mips/plugin/pluginmanagerapp.h"  // by txx
+#endif
+
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
@@ -75,6 +79,11 @@ int main(int argc, char *argv[])
         DThemeManager::instance()->setTheme("light");
 
         app.setApplicationDisplayName(QObject::tr("Deepin File Manager"));
+
+#ifdef MENU_DIALOG_PLUGIN
+        // by txx 加载插件
+        pluginManagerApp->loadPlugin();
+#endif
 
         if (!isBackendRun){
             fileManagerApp->show(commandlineUrl);

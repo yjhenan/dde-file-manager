@@ -39,6 +39,9 @@
 #include "sw_label/filemanager.h"
 #endif
 
+#ifdef MENU_DIALOG_PLUGIN
+#include "mips/plugin/pluginmanagerapp.h"  // by txx
+#endif
 
 AppController::AppController(QObject *parent) : QObject(parent)
 {
@@ -589,3 +592,22 @@ AppController::~AppController()
 
 }
 
+#ifdef MENU_DIALOG_PLUGIN
+void AppController::actionCustom(const FMEvent& event, int type )  // by  txx
+{
+    const DUrlList& urls = event.fileUrlList();
+    if (urls.isEmpty())
+    {
+        return;
+    }
+
+    QStringList args;
+    foreach (DUrl url, urls)
+    {
+        args << url.toLocalFile();
+    }
+    qDebug() << "type:" << type << " filename:"<< args;
+    pluginManagerApp->callMenu( args, type );  // by txx, 点击菜单的处理
+    return;
+}
+#endif

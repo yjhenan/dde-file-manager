@@ -44,6 +44,11 @@
 #include <QStackedWidget>
 #include <QStorageInfo>
 
+#ifdef MENU_DIALOG_PLUGIN
+#include "mips/plugin/pluginmanagerapp.h"  // by txx
+#endif
+
+
 
 NameTextEdit::NameTextEdit(const QString &text, QWidget *parent):
     QTextEdit(text, parent)
@@ -221,11 +226,24 @@ PropertyDialog::PropertyDialog(const DUrl &url, QWidget* parent)
         }else{
             titleList = QStringList() << basicInfo;
         }
+#ifdef MENU_DIALOG_PLUGIN
+        // 调用插件，处理增加右键扩展属性的功能, by  txx
+        QList<QFrame*> frames;
+        pluginManagerApp->addExpandInfo( fileInfo->absoluteFilePath(),titleList, frames);
+#endif
         DExpandGroup *expandGroup = addExpandWidget(titleList);
         expandGroup->expand(0)->setExpandedSeparatorVisible(false);
         expandGroup->expand(0)->setContent(m_basicInfoFrame);
         expandGroup->expand(0)->setExpand(true);
-
+#ifdef MENU_DIALOG_PLUGIN
+       // 处理插件中取回的扩展属性, by  txx
+       for( int i = 0; i < frames.size(  ); i++ )
+       {
+           expandGroup->expand( i+1 )->setExpandedSeparatorVisible(false);
+           expandGroup->expand( i+1 )->setContent(frames[ i ]);
+           expandGroup->expand( i+1 )->setExpand(false);
+       }
+#endif
         if (fileInfo->isFile()){
     //        m_OpenWithListWidget = createOpenWithListWidget(fileInfo);
     //        expandGroup->expand(1)->setContent(m_OpenWithListWidget);

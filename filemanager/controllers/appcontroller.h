@@ -90,6 +90,10 @@ public slots:
     void actionEditLabel(const FMEvent& event);
     void actionPrivateFileToPublic(const FMEvent& event);
 #endif
+
+#ifdef MENU_DIALOG_PLUGIN
+    void actionCustom(const FMEvent& event, int type );
+#endif
     // Subscriber interface
 public:
     void doSubscriberAction(const QString &path);

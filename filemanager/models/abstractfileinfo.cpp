@@ -28,6 +28,10 @@
 #include "../views/filemenumanager.h"
 #endif
 
+#ifdef MENU_DIALOG_PLUGIN
+#include "mips/plugin/pluginmanagerapp.h"  // by txx
+#endif
+
 namespace FileSortFunction {
 Qt::SortOrder sortOrderGlobal;
 AbstractFileInfo::sortFunction sortFun;
@@ -405,7 +409,9 @@ QVector<MenuAction> AbstractFileInfo::menuActionList(AbstractFileInfo::MenuType 
                     actionKeys << MenuAction::Compress;
                 }
             }
-
+#ifdef MENU_DIALOG_PLUGIN
+            pluginManagerApp->additionalMenu( absoluteFilePath(), actionKeys );  // by txx, 增加取回显示的菜单
+#endif
             actionKeys << MenuAction::Separator
                        << MenuAction::Delete
                        << MenuAction::Separator;
@@ -785,6 +791,9 @@ QMap<MenuAction, QVector<MenuAction> > AbstractFileInfo::subMenuActionList() con
 
     actions.insert(MenuAction::SortBy, sortByMenuActionKeys);
 
+#ifdef MENU_DIALOG_PLUGIN
+    pluginManagerApp->additionalSubMenu( absoluteFilePath(), actions );  // by txx, 增加取回显示的子菜单
+#endif
     return actions;
 }
 

@@ -34,6 +34,7 @@ isEqual(ARCH, sw_64) | isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
 
 isEqual(ARCH, mips64) | isEqual(ARCH, mips32) {
     DEFINES += SPLICE_CP
+    DEFINES += MENU_DIALOG_PLUGIN
 }
 
 isEmpty(PREFIX){
@@ -172,7 +173,9 @@ HEADERS += \
     filemanager/shutil/filessizeworker.h \
     filemanager/views/computerview.h \
     filemanager/views/flowlayout.h \
-    filemanager/shutil/shortcut.h
+    filemanager/shutil/shortcut.h \
+    mips/plugin/ddefileinterface.h \
+    mips/plugin/pluginmanagerapp.h
 
 
 
@@ -270,7 +273,8 @@ SOURCES += \
     filemanager/shutil/filessizeworker.cpp \
     filemanager/views/computerview.cpp \
     filemanager/views/flowlayout.cpp \
-    filemanager/shutil/shortcut.cpp
+    filemanager/shutil/shortcut.cpp \
+    mips/plugin/pluginmanagerapp.cpp
 
 
 
