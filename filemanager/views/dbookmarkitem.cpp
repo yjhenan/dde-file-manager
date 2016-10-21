@@ -544,6 +544,8 @@ void DBookmarkItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             event = m_url;
             event = FMEvent::LeftSideBar;
             event = windowId();
+            if(m_group)
+                event.setBookmarkIndex(m_group->items()->indexOf(this));
             int result = dialogManager->showRemoveBookMarkDialog(event);
             if (result == DDialog::Accepted)
             {
