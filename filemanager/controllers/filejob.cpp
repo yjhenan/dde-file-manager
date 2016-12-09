@@ -4,6 +4,7 @@
 #include "../shutil/fileutils.h"
 
 #include "widgets/singleton.h"
+#include "deviceinfo/udisklistener.h"
 
 #include <QFile>
 #include <QThread>
@@ -24,6 +25,10 @@
 #include <sys/stat.h>
 #include <sys/syscall.h>
 
+#ifdef SW_LABEL
+#include "sw_label/filemanager.h"
+#include "sw_label/llsdeeplabel.h"
+#endif
 
 QPair<DUrl, int> FileJob::selectionAndRenameFile;
 
@@ -38,14 +43,14 @@ void FileJob::setStatus(FileJob::Status status)
     m_status = status;
 }
 
-FileJob::FileJob(const QString &title, QObject *parent) : QObject(parent)
+FileJob::FileJob(const QString &type, QObject *parent) : QObject(parent)
 {
     FileJobCount += 1;
     m_status = FileJob::Started;
     QString user = getenv("USER");
     m_trashLoc = "/home/" + user + "/.local/share/Trash";
     m_id = QString::number(FileJobCount);
-    m_title = title;
+    m_jobType = type;
     connect(this, &FileJob::finished, this, &FileJob::handleJobFinished);
 
 #ifdef SPLICE_CP
@@ -435,7 +440,7 @@ void FileJob::jobAdded()
     if(m_isJobAdded)
         return;
     m_jobDetail.insert("jobId", m_id);
-    m_jobDetail.insert("type", m_title);
+    m_jobDetail.insert("type", m_jobType);
     emit fileSignalManager->jobAdded(m_jobDetail);
     m_isJobAdded = true;
 }
@@ -473,7 +478,28 @@ void FileJob::jobConflicted()
 }
 
 bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMoved, QString *targetPath)
-{
+{   
+#ifdef SW_LABEL
+    bool isLabelFileFlag = isLabelFile(srcFile);
+    if (isLabelFileFlag){
+        qDebug() << tarDir << deviceListener->isInRemovableDeviceFolder(tarDir);
+        int nRet = 0;
+        if (deviceListener->isInRemovableDeviceFolder(tarDir)){
+            nRet = checkStoreInRemovableDiskPrivilege(srcFile);
+            if (nRet != 0){
+                emit fileSignalManager->jobFailed(nRet, m_jobType, srcFile);
+                return false;
+            }
+        }else{
+            nRet = checkCopyJobPrivilege(srcFile);
+            if (nRet != 0){
+                emit fileSignalManager->jobFailed(nRet, m_jobType, srcFile);
+                return false;
+            }
+        }
+    }
+    qDebug() << "isLabelFile" << srcFile << isLabelFileFlag;
+#endif
     if(m_applyToAll && m_status == FileJob::Cancelled){
         return false;
     }else if(!m_applyToAll && m_status == FileJob::Cancelled){
@@ -558,9 +584,9 @@ bool FileJob::copyFile(const QString &srcFile, const QString &tarDir, bool isMov
                 in_fd = from.handle();
                 out_fd = to.handle();
                 len = sf.size();
+                posix_fadvise(from.handle(), 0, len, POSIX_FADV_SEQUENTIAL);
+                posix_fadvise(from.handle(), 0, len, POSIX_FADV_WILLNEED);
  #endif
-                posix_fadvise(from.handle(), 0, sf.size(), POSIX_FADV_SEQUENTIAL);
-                posix_fadvise(from.handle(), 0, sf.size(), POSIX_FADV_WILLNEED);
                 break;
             }
             case FileJob::Run:
@@ -778,6 +804,28 @@ bool FileJob::copyDir(const QString &srcPath, const QString &tarPath, bool isMov
 
 bool FileJob::moveFile(const QString &srcFile, const QString &tarDir, QString *targetPath)
 {
+#ifdef SW_LABEL
+    bool isLabelFileFlag = isLabelFile(srcFile);
+    if (isLabelFileFlag){
+        qDebug() << tarDir << deviceListener->isInRemovableDeviceFolder(tarDir);
+        int nRet = 0;
+        if (deviceListener->isInRemovableDeviceFolder(tarDir)){
+            nRet = checkStoreInRemovableDiskPrivilege(srcFile);
+            if (nRet != 0){
+                emit fileSignalManager->jobFailed(nRet, m_jobType, srcFile);
+                return false;
+            }
+        }else{
+            nRet = checkMoveJobPrivilege(srcFile);
+            if (nRet != 0){
+                emit fileSignalManager->jobFailed(nRet, m_jobType, srcFile);
+                return false;
+            }
+        }
+    }
+    qDebug() << "isLabelFile" << srcFile << isLabelFileFlag;
+#endif
+
     if(m_applyToAll && m_status == FileJob::Cancelled){
         return false;
     }else if(!m_applyToAll && m_status == FileJob::Cancelled){
@@ -1014,13 +1062,25 @@ bool FileJob::moveDir(const QString &srcFile, const QString &tarDir, QString *ta
 
 bool FileJob::deleteFile(const QString &file)
 {
-    if(QFile::remove(file)){
+#ifdef SW_LABEL
+    if (isLabelFile(file)){
+        int nRet = checkDeleteJobPrivilege(file);
+        if (nRet != 0){
+            emit fileSignalManager->jobFailed(nRet, m_jobType, file);
+            return false;
+        }
+    }
+#endif
+
+    QFile f(file);
+
+    if(f.remove()){
 //        qDebug() << " delete file:" << file << "successfully";
         return true;
     }
     else
     {
-        qDebug() << "unable to delete file:" << file;
+        qDebug() << "unable to delete file:" << file << f.errorString();
         return false;
     }
 }
@@ -1181,3 +1241,65 @@ bool FileJob::writeTrashInfo(const QString &fileBaseName, const QString &path, c
 
     return size > 0;
 }
+
+#ifdef SW_LABEL
+bool FileJob::isLabelFile(const QString &srcFileName)
+{
+    std::string path = srcFileName.toStdString();
+    int ret = lls_simplechecklabel(const_cast<char*>(path.c_str()));
+    qDebug() << ret << srcFileName;
+    if (ret == 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+int FileJob::checkCopyJobPrivilege(const QString &srcFileName)
+{
+    std::string path = srcFileName.toStdString();
+    int nRet =  lls_checkprivilege(const_cast<char*>(path.c_str()), NULL, E_FILE_PRI_COPY);
+    qDebug() << nRet << srcFileName;
+    return nRet;
+}
+
+int FileJob::checkMoveJobPrivilege(const QString &srcFileName)
+{
+    std::string path = srcFileName.toStdString();
+    int nRet =  lls_checkprivilege(const_cast<char*>(path.c_str()), NULL, E_FILE_PRI_MOVE);
+    qDebug() << nRet << srcFileName;
+    return nRet;
+}
+
+int FileJob::checkStoreInRemovableDiskPrivilege(const QString &srcFileName)
+{
+    std::string path = srcFileName.toStdString();
+    int nRet =  lls_checkprivilege(const_cast<char*>(path.c_str()), NULL, E_FILE_PRI_STORE);
+    qDebug() << nRet << srcFileName;
+    return nRet;
+}
+
+int FileJob::checkDeleteJobPrivilege(const QString &srcFileName)
+{
+    std::string path = srcFileName.toStdString();
+    int nRet =  lls_checkprivilege(const_cast<char*>(path.c_str()), NULL, E_FILE_PRI_DELETE);
+    qDebug() << nRet << srcFileName;
+    return nRet;
+}
+
+int FileJob::checkRenamePrivilege(const QString &srcFileName)
+{
+    std::string path = srcFileName.toStdString();
+    int nRet =  lls_checkprivilege(const_cast<char*>(path.c_str()), NULL, E_FILE_PRI_RENAME);
+    qDebug() << nRet << srcFileName;
+    return nRet;
+}
+
+int FileJob::checkReadPrivilege(const QString &srcFileName)
+{
+    std::string path = srcFileName.toStdString();
+    int nRet =  lls_checkprivilege(const_cast<char*>(path.c_str()), NULL, E_FILE_PRI_READ);
+    qDebug() << nRet << srcFileName;
+    return nRet;
+}
+#endif

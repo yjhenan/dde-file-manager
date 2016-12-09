@@ -36,7 +36,7 @@ public:
     static qint64 Data_Flush_Size;
 
     void setStatus(Status status);
-    explicit FileJob(const QString &title, QObject *parent = 0);
+    explicit FileJob(const QString &type, QObject *parent = 0);
     ~FileJob();
     void setJobId(const QString &id);
     QString getJobId();
@@ -52,6 +52,7 @@ public:
     inline qint64 currentMsec() { return m_timer.elapsed(); }
     inline qint64 lastMsec() { return m_lastMsec; }
     inline bool isJobAdded() { return m_isJobAdded; }
+    inline QString getJobType() { return m_jobType; }
 
 signals:
     void progressPercent(int value);
@@ -96,7 +97,7 @@ private:
     qint64 m_lastMsec;
     bool m_applyToAll  = false;
     bool m_isReplaced = false;
-    QString m_title;
+    QString m_jobType;
     int m_windowId = -1;
     int m_filedes[2] = {0, 0};
     bool m_isInSameDisk = true;
@@ -114,6 +115,17 @@ private:
     bool writeTrashInfo(const QString &fileBaseName, const QString &path, const QString &time);
 
     QString getNotExistsTrashFileName(const QString &fileName);
+
+#ifdef SW_LABEL
+public:
+    static bool isLabelFile(const QString &srcFileName);
+    static int checkCopyJobPrivilege(const QString &srcFileName);
+    static int checkMoveJobPrivilege(const QString &srcFileName);
+    static int checkStoreInRemovableDiskPrivilege(const QString &srcFileName);
+    static int checkDeleteJobPrivilege(const QString &srcFileName);
+    static int checkRenamePrivilege(const QString &srcFileName);
+    static int checkReadPrivilege(const QString &srcFileName);
+#endif
 };
 
 #endif // FILEJOB_H
