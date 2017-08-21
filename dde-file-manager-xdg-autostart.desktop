@@ -2,4 +2,4 @@
 Type=Application
 Name=dde-file-manager auto
 Exec=/usr/bin/dde-xdg-user-dirs-update.sh
-NoShowIn=GNOME;Unity;Deepin
+NotShowIn=GNOME;Unity;Deepin
