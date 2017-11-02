@@ -31,6 +31,10 @@ CONFIG(debug, debug|release) {
     unix:QMAKE_RPATHDIR += $$OUT_PWD/../dde-file-manager-lib
 }
 
+isEqual(IS_PLATFORM_X86_PRO, YES){
+    DEFINES += QT_QPA_PLATFORM_PLUGIN_PATH
+}
+
 SOURCES += \
     main.cpp \
     config/config.cpp \
